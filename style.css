@@ -31,26 +31,27 @@ body {
 /* 4. 큰 제목 */
 .title {
   margin: 0 0 12px;
-  font-size: clamp(2.4rem, 8vw, 4.2rem); /* 화면 크기에 따라 자동 조절 */
+  font-size: clamp(2.4rem, 7.4vw, 3.9rem); /* 화면 크기에 따라 자동 조절 */
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.03em;
   word-break: keep-all;                  /* 한글 단어 중간에서 줄바꿈 안 되게 */
 }
 
-/* 5. 제목 위의 반쪽 아보카도 그림 (이미지 없이 CSS로만 그림) */
-.title::before {
+/* 5. '아카이브' 옆에 큰 아보카도 (아카이브 + 아보카도)
+      옆과 아래(소개 줄 높이)까지 걸치게 크게 그림.
+      position: absolute 라서 다른 글자 자리를 밀어내지 않음 */
+.title::after {
   content: "";
-  display: block;
-  width: 64px;
-  height: 84px;
-  margin-bottom: 20px;
-  border: 6px solid var(--skin);                              /* 껍질 */
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;           /* 위가 좁은 아보카도 모양 */
-  background: radial-gradient(circle at 50% 62%,
-              var(--pit) 0 26%,                               /* 씨 */
-              var(--flesh-light) 27% 42%,                     /* 씨 주변 노란 과육 */
-              var(--flesh) 43%);                              /* 바깥 연두 과육 */
+  position: absolute;            /* 원래 붙을 자리(아카이브 바로 뒤)에서 띄워 그림 */
+  width: 1.2em;
+  height: 1.58em;
+  margin-left: 0.1em;
+  margin-top: -0.12em;           /* 위아래 위치 미세 조절 */
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 132'%3E%3Cpath d='M50 6C72 6 82 42 90 72C97 106 77 126 50 126C23 126 3 106 10 72C18 42 28 6 50 6Z' fill='%23c9dc7a' stroke='%232f4a1e' stroke-width='8' stroke-linejoin='round'/%3E%3Cellipse cx='50' cy='84' rx='27' ry='28' fill='%23eef3c4'/%3E%3Ccircle cx='50' cy='86' r='17' fill='%237b4a26'/%3E%3Ccircle cx='44' cy='80' r='5' fill='%23a06a3f'/%3E%3C/svg%3E")
+              center / contain no-repeat;
+  transform: rotate(14deg);      /* 글자 쪽으로 기대듯 기울이기 */
+  transform-origin: 30% 80%;
 }
 
 /* 6. 한 줄 소개 */
@@ -140,5 +141,17 @@ body {
     padding: 14px 16px;
     border-radius: 28px;   /* 글이 두 줄이 돼도 어색하지 않게 덜 둥글게 */
     font-size: 1rem;
+  }
+}
+
+/* 15. 휴대폰에서는 소개 글과 겹치지 않게 아보카도를 글자 크기로 */
+@media (max-width: 600px) {
+  .title::after {
+    position: static;
+    display: inline-block;
+    width: 0.8em;
+    height: 1.05em;
+    margin-top: 0;
+    vertical-align: -0.12em;
   }
 }
