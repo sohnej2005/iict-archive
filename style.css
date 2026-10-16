@@ -1,0 +1,144 @@
+/* =========================================
+   손은정의 과제 아카이브 - 아보카도 테마 🥑
+   ========================================= */
+
+/* 1. 색 정의: 아보카도 부분별 색을 변수로 저장 */
+:root {
+  --skin: #2f4a1e;        /* 껍질: 진한 초록 (글자, 테두리) */
+  --flesh: #c9dc7a;       /* 과육 바깥쪽: 연두 */
+  --flesh-light: #eef3c4; /* 과육 안쪽: 크림빛 연두 */
+  --cream: #f8f7e6;       /* 배경: 아주 연한 크림색 */
+  --pit: #7b4a26;         /* 씨: 갈색 (포인트 색) */
+}
+
+/* 2. 모든 요소의 크기를 테두리까지 포함해서 계산 */
+* {
+  box-sizing: border-box;
+}
+
+/* 3. 페이지 전체 */
+body {
+  margin: 0 auto;              /* 가운데 정렬 */
+  max-width: 760px;            /* 너무 넓게 퍼지지 않게 */
+  padding: 56px 20px 80px;     /* 위, 좌우, 아래 여백 */
+  background-color: var(--cream);
+  color: var(--skin);
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+               "Malgun Gothic", "Noto Sans KR", sans-serif;
+  line-height: 1.6;
+}
+
+/* 4. 큰 제목 */
+.title {
+  margin: 0 0 12px;
+  font-size: clamp(2.4rem, 8vw, 4.2rem); /* 화면 크기에 따라 자동 조절 */
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  word-break: keep-all;                  /* 한글 단어 중간에서 줄바꿈 안 되게 */
+}
+
+/* 5. 제목 위의 반쪽 아보카도 그림 (이미지 없이 CSS로만 그림) */
+.title::before {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 84px;
+  margin-bottom: 20px;
+  border: 6px solid var(--skin);                              /* 껍질 */
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;           /* 위가 좁은 아보카도 모양 */
+  background: radial-gradient(circle at 50% 62%,
+              var(--pit) 0 26%,                               /* 씨 */
+              var(--flesh-light) 27% 42%,                     /* 씨 주변 노란 과육 */
+              var(--flesh) 43%);                              /* 바깥 연두 과육 */
+}
+
+/* 6. 한 줄 소개 */
+.intro {
+  margin: 0 0 40px;
+  padding-bottom: 24px;
+  border-bottom: 3px solid var(--flesh); /* 아래에 연두색 구분선 */
+  font-size: 1.05rem;
+  opacity: 0.85;
+}
+
+/* 7. 과제 목록: 기본 점(•) 없애고 세로로 간격 두고 쌓기 */
+.work-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+  counter-reset: work; /* 번호 세기 시작 */
+}
+
+/* 8. 목록 항목마다 번호 1씩 증가 */
+.work-item {
+  counter-increment: work;
+}
+
+/* 9. 과제 링크를 둥근 카드 모양으로 */
+.work-link {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 22px;
+  background-color: var(--flesh-light);
+  border: 3px solid var(--skin);
+  border-radius: 999px;               /* 양 끝이 둥근 알약 모양 */
+  box-shadow: 0 4px 0 var(--skin);    /* 아래쪽 진한 그림자로 입체감 */
+  color: var(--skin);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-decoration: none;              /* 밑줄 없애기 */
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+/* 10. 카드 왼쪽의 갈색 '씨' 동그라미 + 번호 (01, 02, 03) */
+.work-link::before {
+  content: counter(work, decimal-leading-zero);
+  flex-shrink: 0;                     /* 글이 길어도 동그라미가 찌그러지지 않게 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6em;
+  height: 2.6em;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #a06a3f, var(--pit) 60%); /* 반짝이는 씨 느낌 */
+  color: var(--cream);
+  font-size: 0.9rem;
+}
+
+/* 11. 마우스를 올리거나 키보드로 선택했을 때: 살짝 떠오름 */
+.work-link:hover,
+.work-link:focus-visible {
+  background-color: var(--flesh);
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 var(--skin);
+}
+
+/* 12. 키보드로 선택했을 때 갈색 테두리 표시 */
+.work-link:focus-visible {
+  outline: 3px solid var(--pit);
+  outline-offset: 4px;
+}
+
+/* 13. 클릭하는 순간: 꾹 눌리는 느낌 */
+.work-link:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--skin);
+}
+
+/* 14. 휴대폰 화면 (폭 480px 이하) */
+@media (max-width: 480px) {
+  body {
+    padding: 36px 16px 56px;
+  }
+
+  .work-link {
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 28px;   /* 글이 두 줄이 돼도 어색하지 않게 덜 둥글게 */
+    font-size: 1rem;
+  }
+}
