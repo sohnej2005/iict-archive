@@ -19,8 +19,8 @@
 /* 3. 페이지 전체 */
 body {
   margin: 0 auto;              /* 가운데 정렬 */
-  max-width: 760px;            /* 너무 넓게 퍼지지 않게 */
-  padding: 56px 20px 80px;     /* 위, 좌우, 아래 여백 */
+  max-width: 680px;            /* 너무 넓게 퍼지지 않게 */
+  padding: 110px 20px 80px;    /* 위, 좌우, 아래 여백 (위를 넉넉하게) */
   background-color: var(--cream);
   color: var(--skin);
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
@@ -30,12 +30,13 @@ body {
 
 /* 4. 큰 제목 */
 .title {
-  margin: 0 0 12px;
-  font-size: clamp(2.4rem, 7.4vw, 3.9rem); /* 화면 크기에 따라 자동 조절 */
+  margin: 0 0 10px;
+  font-size: clamp(1.9rem, 6vw, 2.9rem); /* 화면 크기에 따라 자동 조절 */
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.03em;
   word-break: keep-all;                  /* 한글 단어 중간에서 줄바꿈 안 되게 */
+  text-align: center;                    /* 가운데 정렬 */
 }
 
 /* 5. '아카이브' 옆에 큰 아보카도 (아카이브 + 아보카도)
@@ -44,23 +45,32 @@ body {
 .title::after {
   content: "";
   position: absolute;            /* 원래 붙을 자리(아카이브 바로 뒤)에서 띄워 그림 */
-  width: 1.2em;
+  width: 1.32em;
   height: 1.58em;
   margin-left: 0.1em;
   margin-top: -0.12em;           /* 위아래 위치 미세 조절 */
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 132'%3E%3Cpath d='M50 6C72 6 82 42 90 72C97 106 77 126 50 126C23 126 3 106 10 72C18 42 28 6 50 6Z' fill='%23c9dc7a' stroke='%232f4a1e' stroke-width='8' stroke-linejoin='round'/%3E%3Cellipse cx='50' cy='84' rx='27' ry='28' fill='%23eef3c4'/%3E%3Ccircle cx='50' cy='86' r='17' fill='%237b4a26'/%3E%3Ccircle cx='44' cy='80' r='5' fill='%23a06a3f'/%3E%3C/svg%3E")
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-5 0 110 132'%3E%3Cpath d='M50 8C77 8 88 40 94 70C101 106 80 127 50 127C20 127 -1 106 6 70C12 40 23 8 50 8Z' fill='%23c9dc7a' stroke='%232f4a1e' stroke-width='8' stroke-linejoin='round'/%3E%3Cellipse cx='50' cy='84' rx='32' ry='32' fill='%23eef3c4'/%3E%3Ccircle cx='50' cy='86' r='20' fill='%237b4a26'/%3E%3Ccircle cx='43' cy='79' r='6' fill='%23a06a3f'/%3E%3C/svg%3E")
               center / contain no-repeat;
   transform: rotate(14deg);      /* 글자 쪽으로 기대듯 기울이기 */
   transform-origin: 30% 80%;
 }
 
+/* 제목 + 아보카도를 한 덩어리로 보고 가운데 맞추기
+   (아보카도가 오른쪽에 붙는 만큼 제목을 왼쪽으로 살짝 밀어줌) */
+@media (min-width: 601px) {
+  .title {
+    padding-right: 1.4em;
+  }
+}
+
 /* 6. 한 줄 소개 */
 .intro {
-  margin: 0 0 40px;
-  padding-bottom: 24px;
+  margin: 0 0 32px;
+  padding-bottom: 20px;
   border-bottom: 3px solid var(--flesh); /* 아래에 연두색 구분선 */
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   opacity: 0.85;
+  text-align: center;                    /* 가운데 정렬 */
 }
 
 /* 7. 과제 목록: 기본 점(•) 없애고 세로로 간격 두고 쌓기 */
@@ -69,7 +79,7 @@ body {
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 16px;
+  gap: 12px;
   counter-reset: work; /* 번호 세기 시작 */
 }
 
@@ -82,14 +92,14 @@ body {
 .work-link {
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding: 18px 22px;
+  gap: 14px;
+  padding: 12px 18px;
   background-color: var(--flesh-light);
-  border: 3px solid var(--skin);
+  border: 2.5px solid var(--skin);
   border-radius: 999px;               /* 양 끝이 둥근 알약 모양 */
   box-shadow: 0 4px 0 var(--skin);    /* 아래쪽 진한 그림자로 입체감 */
   color: var(--skin);
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 700;
   text-decoration: none;              /* 밑줄 없애기 */
   transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
@@ -102,12 +112,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.6em;
-  height: 2.6em;
+  width: 2.4em;
+  height: 2.4em;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #a06a3f, var(--pit) 60%); /* 반짝이는 씨 느낌 */
   color: var(--cream);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 /* 11. 마우스를 올리거나 키보드로 선택했을 때: 살짝 떠오름 */
@@ -133,14 +143,14 @@ body {
 /* 14. 휴대폰 화면 (폭 480px 이하) */
 @media (max-width: 480px) {
   body {
-    padding: 36px 16px 56px;
+    padding: 72px 16px 56px;
   }
 
   .work-link {
-    gap: 14px;
-    padding: 14px 16px;
-    border-radius: 28px;   /* 글이 두 줄이 돼도 어색하지 않게 덜 둥글게 */
-    font-size: 1rem;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: 24px;   /* 글이 두 줄이 돼도 어색하지 않게 덜 둥글게 */
+    font-size: 0.95rem;
   }
 }
 
@@ -149,7 +159,7 @@ body {
   .title::after {
     position: static;
     display: inline-block;
-    width: 0.8em;
+    width: 0.88em;
     height: 1.05em;
     margin-top: 0;
     vertical-align: -0.12em;
